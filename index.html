@@ -3,51 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orimba Tab Tester</title>
+    <title>INSPECTION</title>
+    <style>
+        .number-button {
+            align-items: center;
+            float: left;
+            margin-right: 50px;
+            margin-bottom : 30px;
+        }
+        .number-button label {
+            margin-bottom: 5px;
+            text-align: center;
+            width: 100%; /* Membuat label memenuhi lebar parent */
+        }
+        .plus-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 15px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #04AA6D;
+            border: none;
+            border-radius: 15px;
+            {% comment %} box-shadow: 0 9px #999; {% endcomment %}
+          }
+          
+          .plus-btn:hover {background-color: #3e8e41}
+          
+          .plus-btn:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+          }
+    
+          .minus-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 15px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #f00707;
+            border: none;
+            border-radius: 15px;
+          }
+          
+          .minus-btn:hover {background-color: #9c221c}
+          
+          .minus-btn:active {
+            background-color: #9c221c;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+          }
+    
+          .number {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fcf5f5;
+            background-color: #080707;
+            border: none;
+            border-radius: 15px;
+          }
+          
+          .number:hover {background-color: #bfbbbb}
+          
+          .number:active {
+            background-color: #bfbbbb;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+          }
+    </style>
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+  />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
 </head>
 <body>
-    <button id='startBtn' onclick="">START</button>
-    <button id='stopBtn'>STOP</button>
-    <button id='finishBtn'>FINISH</button>
-
-    <div id='arrayContent'>
-        <ul id='ul_id'>
-            begin
-        </ul>
+    <div
+      style="
+        color: #575757;
+        font-style: bold;
+        font-size: 2rem;
+        border-bottom: 1px solid white;
+        text-align: center;
+      "
+    >
+      INSPECTION
     </div>
-</body>
 
-<script>
-        let start = document.getElementById('startBtn')
-        let stop = document.getElementById('stopBtn')
-        let finish = document.getElementById('finishBtn')
+    <div
+      class="card card-body border-light shadow-sm table-wrapper table-responsive pt-4 mx-auto"
+    >
+    <div class="form-group mb-2 col-md-3">
+        <strong>
+          <label>Inspector</label>
+        </strong>
+        <div class="select">
+          <select
+            id="id_inspector"
+            name="id_inspector"
+            class="form-control"
+            oninput="machinePicker(), disableSelection(), onClickMachine()"
+            required
+          >
+            <option selected></option>
+            <option value="1">Test 1</option>
+            <option value="2">Test 2</option>
+            <option value="3">Test 3</option>
+            <option value="4">Test 4</option>
+            <option value="5">Test 5</option>
+          </select>
+        </div>
+      </div>
 
-        let ul = document.getElementById('ul_id')
+      <br/>
+      
+    <!-- Your form fields -->
+    <input type="hidden" id="cacat_1" name="cacat_1" value="0">
+    <input type="hidden" id="cacat_2" name="cacat_2" value="0">
+    <input type="hidden" id="cacat_3" name="cacat_3" value="0">
+    <input type="hidden" id="cacat_4" name="cacat_4" value="0">
+    <input type="hidden" id="cacat_5" name="cacat_5" value="0">
+    <input type="hidden" id="cacat_6" name="cacat_6" value="0">
+    <input type="hidden" id="cacat_7" name="cacat_7" value="0">
+    <input type="hidden" id="cacat_8" name="cacat_8" value="0">
+    <input type="hidden" id="cacat_9" name="cacat_9" value="0">
+    <input type="hidden" id="cacat_10" name="cacat_10" value="0">
+    <input type="hidden" id="cacat_11" name="cacat_11" value="0">
+    <input type="hidden" id="cacat_12" name="cacat_12" value="0">
+    <input type="hidden" id="cacat_13" name="cacat_13" value="0">
+    <input type="hidden" id="cacat_14" name="cacat_14" value="0">
+    <input type="hidden" id="cacat_15" name="cacat_15" value="0">
+    <input type="hidden" id="cacat_16" name="cacat_16" value="0">
+    <input type="hidden" id="cacat_17" name="cacat_17" value="0">
+    <input type="hidden" id="cacat_18" name="cacat_18" value="0">
+    <input type="hidden" id="cacat_19" name="cacat_19" value="0">
+    <input type="hidden" id="cacat_20" name="cacat_20" value="0">
+    <div class="button-container">
+        <div class="number-button">
+            <label>Cacat 1</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_1">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+    
+        <div class="number-button">
+            <label>Cacat 2</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_2">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
 
-        let emptyArray = ['begin']
+        <div class="number-button">
+            <label>Cacat 3</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_3">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
 
+        <div class="number-button">
+            <label>Cacat 4</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_4">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 5</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_5">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 6</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_6">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 7</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_7">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 8</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_8">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 9</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_9">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 10</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_10">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 11</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_11">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 12</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_12">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 13</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_13">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 14</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_14">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 15</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_15">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 16</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_16">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 17</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_17">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 18</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_18">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 19</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_19">0</button>
+                <button class="plus-btn" type="button">+</button>
+            </div>
+        </div>
+
+        <div class="number-button">
+            <label>Cacat 20</label>
+            <div class="button-group">
+                <button class="minus-btn" type="button">-</button>
+                <button class="number" type="button" data-input-id="cacat_20">0</button>
+                <button class="plus-btn" type="button" >+</button>
+            </div>
+        </div>
         
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        start.addEventListener('click', function(){
-            // Create a new Date object
-            let currentDate = new Date();
-
-            // Get the current time components
-            let hours = currentDate.getHours();
-            let minutes = currentDate.getMinutes();
-            let seconds = currentDate.getSeconds();
-
-            // Format the time as HH:MM:SS
-            let currentTime = hours + ":" + minutes + ":" + seconds;
-
-            emptyArray.push(`starting time: ${currentTime}`)
-            console.log('value of emptyArray: ', emptyArray)
-            
-            let li = document.createElement('li')
-            li.textContent = emptyArray[emptyArray.length -1]
-            ul.appendChild(li)
-            
-        })
-
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const numberButtons = document.querySelectorAll('.number-button');
+      
+          numberButtons.forEach(function(buttonSet) {
+            const minusButton = buttonSet.querySelector('.minus-btn');
+            const plusButton = buttonSet.querySelector('.plus-btn');
+            const numberText = buttonSet.querySelector('.number');
+      
+            let number = 0;
+      
+            // Function to update the number text
+            function updateNumber() {
+              numberText.textContent = number;
+              const inputId = numberText.dataset.inputId;
+              const inputElement = document.getElementById(inputId);
+              if (inputElement) {
+                inputElement.value = number;
+              }
+            }
+      
+            // Event listener for minus button
+            minusButton.addEventListener('click', function() {
+              if (number > 0) {
+                number--;
+                updateNumber();
+              }
+            });
+      
+            // Event listener for plus button
+            plusButton.addEventListener('click', function() {
+              number++;
+              updateNumber();
+            });
+      
+            // Initial update of number text
+            updateNumber();
+          });
+        });
+      </script>
 </html>
