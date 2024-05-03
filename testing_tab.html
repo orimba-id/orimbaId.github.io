@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orimba Tab Tester</title>
+</head>
+<body>
+    <button id='startBtn' onclick="">START</button>
+    <button id='stopBtn'>STOP</button>
+    <button id='finishBtn'>FINISH</button>
+
+    <div id='arrayContent'>
+        <ul id='ul_id'>
+            begin
+        </ul>
+    </div>
+</body>
+
+<script>
+        let start = document.getElementById('startBtn')
+        let stop = document.getElementById('stopBtn')
+        let finish = document.getElementById('finishBtn')
+
+        let ul = document.getElementById('ul_id')
+
+        let emptyArray = ['begin']
+
+        
+
+        start.addEventListener('click', function(){
+            // Create a new Date object
+            let currentDate = new Date();
+
+            // Get the current time components
+            let hours = currentDate.getHours();
+            let minutes = currentDate.getMinutes();
+            let seconds = currentDate.getSeconds();
+
+            // Format the time as HH:MM:SS
+            let currentTime = hours + ":" + minutes + ":" + seconds;
+
+            emptyArray.push(`starting time: ${currentTime}`)
+            console.log('value of emptyArray: ', emptyArray)
+            
+            let li = document.createElement('li')
+            li.textContent = emptyArray[emptyArray.length -1]
+            ul.appendChild(li)
+            
+        })
+
+</script>
+</html>
