@@ -82,6 +82,17 @@
             box-shadow: 0 5px #666;
             transform: translateY(4px);
           }
+
+        .submit-btn {
+            background-color: #007bff; /* Blue background */
+            border: none; /* Remove border */
+            color: white; /* White text */
+            padding: 10px 20px; /* Add padding */
+            font-size: 16px; /* Set font size */
+            cursor: pointer; /* Add hover effect */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+          }
     </style>
     <link
     rel="stylesheet"
@@ -335,6 +346,10 @@
         
     </div>
 </div>
+
+    <div class="submit-btn">
+      <input type="submit" value="SUBMIT" class="submit-btn" onclick="refreshPage()" />
+    </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
